@@ -39,6 +39,16 @@ app.get('/status', (req, res) => {
     });
 });
 
+app.get('/database', (req, res) => {
+    redis.get('database')
+    .then(r => res.send(r));
+});
+
+app.get('/getDatabase', (req, res) => {
+    redis.set('database', req.query.data);
+    res.send(req.query.data);
+});
+
 // Start the server and listen for incoming requests on the specified port
 app.listen(PORT, () => {
     console.log(`Server is listening at http://localhost:${PORT}`);
