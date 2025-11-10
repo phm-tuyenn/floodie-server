@@ -33,9 +33,17 @@ app.get('/status', (req, res) => {
     .then(d => {
       let output = [0, 0]
       let r = d.split(",");
-      if (r[0] > 35 || r[1] > 50 || r[2] > 6000) output[0] = 1
-      if (r[3] > 35 || r[4] > 50 || r[5] > 6000) output[1] = 1
-      res.send(output.toString())
+      redis.get('database')
+      .then(r => {
+        let threshold = []
+        r.split(",").forEach(a => threshold.push(parseInt(a)))
+        return threshold
+    })
+      .then(threshold => {
+        if (r[0] > threshold[0] || r[1] < threshold[1] || r[2] > threshold[2]) output[0] = 1
+        if (r[3] > threshold[3] || r[4] < threshold[4] || r[5] > threshold[5]) output[1] = 1
+        res.send(output.toString())
+      })
     });
 });
 
