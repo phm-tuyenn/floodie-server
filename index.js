@@ -33,8 +33,8 @@ app.get('/status', (req, res) => {
     .then(r => {
       let output = [0, 0]
       r.split(",");
-      if (r[0] > 35 || r[1] < 50 || r[2] > 6000) output[0] = 1
-      if (r[3] > 35 || r[4] < 50 || r[5] > 6000) output[1] = 1
+      if (r[0] > 35 || r[1] > 50 || r[2] > 6000) output[0] = 1
+      if (r[3] > 35 || r[4] > 50 || r[5] > 6000) output[1] = 1
       res.send(output.toString())
     });
 });
