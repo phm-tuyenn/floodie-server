@@ -40,8 +40,8 @@ app.get('/status', (req, res) => {
         return threshold
     })
       .then(threshold => {
-        if (r[0] > threshold[0] || r[1] < threshold[1] || r[2] > threshold[2]) output[0] = 1
-        if (r[3] > threshold[3] || r[4] < threshold[4] || r[5] > threshold[5]) output[1] = 1
+        if (r[0] > threshold[0] || r[1] > threshold[1] || r[2] > threshold[2]) output[0] = 1
+        if (r[3] > threshold[3] || r[4] > threshold[4] || r[5] > threshold[5]) output[1] = 1
         res.send(output.toString())
       })
     });
